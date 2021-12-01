@@ -1,0 +1,4 @@
+*.icloud
+*.cache
+*.csv
+__pycache__
