@@ -1,15 +1,26 @@
 import pika
+class RabbitConnection:
+    
+    _instance = None
+    _connection = None
 
-parametes = pika.ConnectionParameters('localhost')
-connection = pika.BlockingConnection(parametes)
-channel = connection.channel()
+    """ singleton pattern """
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
 
-channel.queue_declare(queue='hello')
+        return cls._instance
+    
 
-channel.basic_publish(exchange='',
-                      routing_key='hello',
-                      body='Hello World!')
+    def __init__(self):
+        if self._connection is None:
+            self._connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
+    
+    def send_message(self, data: str):
+        channel = self._connection.channel()
+        channel.queue_declare(queue='images')
 
-print(" [x] Sent 'Hello World!'")
+        channel.basic_publish(exchange='', routing_key='hello', body=data)
 
-connection.close()
+        
+
