@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+    image-resize:
+        container_name: image-resizer
+        build: ./
+        ports:
+        - 8081:80
+        volumes:
+        - ../:/home/images-resize
+        networks:
+        - app_network
+        
+    rabbitmq3:
+        container_name: "rabbitmq"
+        image: rabbitmq:3.8-management-alpine
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+        ports:
+            # AMQP protocol port
+            - '5672:5672'
+            # HTTP management UI
+            - '15672:15672'
+        networks:
+        - app_network
+
+networks:
+    app_network:
+        driver: bridge
