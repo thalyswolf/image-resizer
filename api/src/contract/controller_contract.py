@@ -1,8 +1,21 @@
+from typing import List
+
+
+class FilesRequest:
+    name: str
+    data: str
+
+    def __init__(self, name, data):
+        self.name = name
+        self.data = data
+
+
 class HttpRequest:
-    def __init__(self, header, payload, params):
+    def __init__(self, header, payload, params, files:List[FilesRequest] = []):
         self.header = header
         self.payload = payload
         self.params = params
+        self.files = files
         
     def __repr__(self):
         return (
