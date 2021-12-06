@@ -15,3 +15,12 @@ def test_should_raise_invalid_width_if_negative_value_on_to_queue_resize_image()
             'width': -200,
             'height': 100
         }, FilesRequest('jpg', 'string'))
+
+def test_should_raise_invalid_height_if_negative_value_on_to_queue_resize_image():
+
+    with pytest.raises(InvalidHeightErrorException):
+        ToQueueImageToResizeUseCase(mock_messaging_queue).execute({
+            'width': 200,
+            'height': -100
+        }, FilesRequest('jpg', 'string'))
+
