@@ -5,3 +5,13 @@ from src.helpers.handler_errors import *
 from src.core.usecase.to_queue_image_to_resize_usecase import ToQueueImageToResizeUseCase
 from src.contract.controller_contract import FilesRequest
 
+
+mock_messaging_queue = MockMessaging()
+
+def test_should_raise_invalid_width_if_negative_value_on_to_queue_resize_image():
+
+    with pytest.raises(InvalidWidthErrorException):
+        ToQueueImageToResizeUseCase(mock_messaging_queue).execute({
+            'width': -200,
+            'height': 100
+        }, FilesRequest('jpg', 'string'))
