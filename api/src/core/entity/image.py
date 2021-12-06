@@ -1,3 +1,3 @@
 class Image:
-    name: str
+    mime: str
     str_data: str
