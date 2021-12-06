@@ -8,16 +8,16 @@ from src.controller.queue_image_to_resize_controller import QueueImageToResizeCo
 app = FastAPI()
 
 @app.post('/resize-image')
-def resize_image(file: UploadFile = File(...), height: str = Form(None), width: str = Form(None), response: Response = Response):
-    
+def resize_image(file: UploadFile = File(...), height: str = Form(0), width: str = Form(0), response: Response = Response):
+
     request = {
         'body': {
-            'height': height,
-            'width': width
+            'height': int(height),
+            'width': int(width)
         },
         'headers': None,
         'query': None,
-        'files': [FilesRequest(file.filename, str(file.file.read()))]
+        'files': [file]
     }
 
     result = QueueImageToResizeController.resize_image(fast_api_adapter(request))
