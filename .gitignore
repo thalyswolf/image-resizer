@@ -1,5 +1,5 @@
 *.icloud
-*.cache
+*cache
 *.csv
 __pycache__
 *.txt
