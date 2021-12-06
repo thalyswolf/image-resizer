@@ -32,3 +32,10 @@ def test_should_raise_invalid_mime_type_value_on_to_queue_resize_image():
             'height': 100
         }, FilesRequest('exe', 'string'))
 
+def test_should_raise_null_mime_type_value_on_to_queue_resize_image():
+
+    with pytest.raises(InvalidFileMimeErrorException):
+        ToQueueImageToResizeUseCase(mock_messaging_queue).execute({
+            'width': 200,
+            'height': 100
+        }, FilesRequest(None, 'string'))
