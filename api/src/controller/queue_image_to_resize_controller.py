@@ -1,7 +1,7 @@
 from traceback import format_exc
 
 from src.helpers.enum.http_status_enum import HTTPResponseStatus
-from src.helpers.handler_errors import GenericErrorException, InvalidHeightErrorException, InvalidWidthErrorException
+from src.helpers.handler_errors import *
 from src.core.usecase.to_queue_image_to_resize_usecase import ToQueueImageToResizeUseCase
 from src.contract.controller_contract import HttpRequest, HttpResponse
 from src.factory.messaging_queue_factory import get_queue_messaging_factory
@@ -20,7 +20,7 @@ class QueueImageToResizeController:
                 'message': 'Accepted, but processing ...'
             })
 
-        except (InvalidHeightErrorException, InvalidWidthErrorException) as ie:
+        except (InvalidHeightErrorException, InvalidWidthErrorException, InvalidFileMimeErrorException, InvalidFileMimeErrorException) as ie:
             return HttpResponse(HTTPResponseStatus.INVALID_DATA, {
                 'message': ie.message
             })
