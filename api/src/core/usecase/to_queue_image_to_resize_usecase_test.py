@@ -47,3 +47,10 @@ def test_should_raise_null_file_data_value_on_to_queue_resize_image():
             'width': 200,
             'height': 100
         }, FilesRequest('jpg', None))
+
+def test_should_return_sucess_to_queue_resize_image():
+
+    ToQueueImageToResizeUseCase(mock_messaging_queue).execute({
+        'width': 200,
+        'height': 100
+    }, FilesRequest('jpg', 'string'))
