@@ -5,8 +5,8 @@ class FilesRequest:
     name: str
     data: str
 
-    def __init__(self, name, data):
-        self.name = name
+    def __init__(self, mime, data):
+        self.mime = mime
         self.data = data
 
 
