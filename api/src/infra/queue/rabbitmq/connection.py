@@ -4,12 +4,12 @@ class RabbitConnection:
     _instance = None
     _connection = None
 
-    """ singleton pattern """
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = object.__new__(cls)
+    # """ singleton pattern """
+    # def __new__(cls):
+    #     if cls._instance is None:
+    #         cls._instance = object.__new__(cls)
 
-        return cls._instance
+    #     return cls._instance
     
 
     def __init__(self):
