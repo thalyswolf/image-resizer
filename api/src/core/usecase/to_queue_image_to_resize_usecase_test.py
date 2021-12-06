@@ -39,3 +39,11 @@ def test_should_raise_null_mime_type_value_on_to_queue_resize_image():
             'width': 200,
             'height': 100
         }, FilesRequest(None, 'string'))
+
+def test_should_raise_null_file_data_value_on_to_queue_resize_image():
+
+    with pytest.raises(InvalidFileDataErrorException):
+        ToQueueImageToResizeUseCase(mock_messaging_queue).execute({
+            'width': 200,
+            'height': 100
+        }, FilesRequest('jpg', None))
