@@ -1,0 +1,7 @@
+class HTTPResponseStatus:
+    SUCESS = 200
+    CREATED = 201
+    ACCEPTED_BUT_PROCESSING = 202
+    INVALID_DATA = 400
+    NOT_FOUND = 404
+    ERROR = 500
