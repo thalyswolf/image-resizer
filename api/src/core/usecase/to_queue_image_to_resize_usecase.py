@@ -1,4 +1,5 @@
 from typing import Dict
+from uuid import uuid4
 
 from src.helpers.enum.accepted_images_format_enum import ACCEPTED_IMAGES_FORMAT
 from src.helpers.get_env import get_env
@@ -30,6 +31,7 @@ class ToQueueImageToResizeUseCase:
         image.str_data = file.data
 
         image_to_resize = ImageToResize()
+        image_to_resize._id = str(uuid4())
         image_to_resize.new_height = int(request.get('height', 0))
         image_to_resize.new_width = int(request.get('width', 0))
         image_to_resize.image = image
