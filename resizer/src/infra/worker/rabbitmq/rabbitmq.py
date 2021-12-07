@@ -15,3 +15,5 @@ def on_listening():
         RabbitConnection().listening_messages(send_to_controller)
     except:
         on_listening()
+
+on_listening()
