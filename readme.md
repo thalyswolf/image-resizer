@@ -17,3 +17,6 @@ No diretório .docker executar o comando
 2. Python 3
 3. RabbitMq
 4. FastAPI
+
+## Como executar um teste
+- TODO
