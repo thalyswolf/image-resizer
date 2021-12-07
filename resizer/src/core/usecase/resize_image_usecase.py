@@ -12,7 +12,14 @@ class ResizeImageUseCase:
 
     def execute(self, request: Dict, file: FilesRequest):
 
+        if request.get('newHeight', None) is None:
+            raise InvalidHeightErrorException()
+
+        if request.get('newWidth', None) is None:
+            raise InvalidWidthErrorException()
+
         try:
+
             image_object = Image()
             image_object.mime = file.mime
             image_object.str_data = file.data
