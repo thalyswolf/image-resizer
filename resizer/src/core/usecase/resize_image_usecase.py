@@ -4,11 +4,13 @@ from src.helpers.image_utils import get_image_from_string_byte, resize_image, sa
 from src.contract.controller_contract import FilesRequest
 from src.core.entity.image import Image
 from src.core.entity.image_to_resize import ImageToResize
-import cv2
-
+from src.contract.image_utils_contract import ImageUtilsContract
+from src.helpers.handler_errors import InvalidWidthErrorException, InvalidHeightErrorException, InvalidTypeParamErrorException
 class ResizeImageUseCase:
-    def __init__(self):
-        pass
+
+    def __init__(self, image_utils: ImageUtilsContract):
+        self.image_utils = image_utils
+
 
     def execute(self, request: Dict, file: FilesRequest):
 
@@ -31,11 +33,7 @@ class ResizeImageUseCase:
             image_to_resize.image = image_object
 
         except:
-            raise Exception()
+            raise InvalidTypeParamErrorException()
+
         else:
-
-            image = get_image_from_string_byte(image_to_resize)
-            image_resized = resize_image(image, image_to_resize.new_height, image_to_resize.new_width)
-            save_img_resize_on_dir(image_resized, image_to_resize)
-
-            print('final')
+            self.image_utils.save_and_resize_image(image_to_resize)
