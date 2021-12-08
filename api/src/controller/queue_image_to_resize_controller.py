@@ -17,7 +17,7 @@ class QueueImageToResizeController:
             _ = ToQueueImageToResizeUseCase(messaging_queue).execute(request.payload, request.files[0])
 
             return HttpResponse(HTTPResponseStatus.ACCEPTED_BUT_PROCESSING, {
-                'message': 'Accepted, but processing ...'
+                'message': 'Accepted!!! but processing ...'
             })
 
         except (InvalidHeightErrorException, InvalidWidthErrorException, InvalidFileMimeErrorException, InvalidFileMimeErrorException) as ie:
