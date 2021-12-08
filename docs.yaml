@@ -1,0 +1,62 @@
+swagger: "2.0"
+info:
+  description: "Documentação do projeto de resimensionamento de imagem"
+  version: "1.0.0"
+  title: "Redimensionador de imagem"
+  contact:
+    email: "thalyswolf01+github@gmail.com"
+host: "localhost:8081"
+basePath: "/"
+tags:
+- name: "Redimensionador"
+  
+schemes:
+- "http"
+
+paths:
+  /resize-image:
+    post:
+      tags:
+      - "Redimensionador"
+      summary: "Add a new pet to the store"
+      description: ""
+      operationId: "addPet"
+      
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - in: formData
+        name: file
+        type: file
+        description: Imagem a ser redimensionada.
+      
+      - in: formData
+        name: height
+        type: string
+        description: Altura (Opcional).
+        
+      - in: formData
+        name: width
+        type: string
+        description: Largura (Opcional).
+        
+      responses:
+        "202": 
+          description: "Imagem será redimensionada em segundo plano"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: "Request inválida"
+        "500":
+          description: "Erro genérico"
+
+
+definitions:
+  ApiResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+
